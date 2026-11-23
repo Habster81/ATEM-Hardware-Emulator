@@ -2,61 +2,60 @@
 
 <img src="icon.png" alt="ATEM Hardware Emulator" width="128">
 
-Plane ein ATEM-Constellation-Setup in **ATEM Software Control**, bevor ein physischer Mischer zur Verfügung steht. Der Emulator stellt auf demselben Windows-PC ein auswählbares Mischermodell bereit. Damit kannst du prüfen, welche Eingänge, Keyer, SuperSource- und Multiview-Optionen das jeweilige Modell für deinen Aufbau bietet.
+Plan an ATEM Constellation setup in **ATEM Software Control** before a physical switcher is available. The emulator provides a selectable switcher model on the same Windows PC, so you can explore the inputs, keyers, SuperSource and Multiview options for your planned setup.
 
-[Windows-Installer und Handbuch](https://www.habster.ch/ATEM-Hardware-Emulator/) · [English overview](#english-overview)
+[Windows installer and manual](https://www.habster.ch/ATEM-Hardware-Emulator/?lang=en) · [Deutsch](#deutsch)
 
-## Schnellstart
+## Quick start
 
-**Voraussetzungen:** Windows 11 x64 und Blackmagic ATEM Switchers aus der 10.2-Reihe. Der Verbindungsaufbau und die Modellkennung wurden mit dem Blackmagic SDK 10.2.1 getestet.
+**Requirements:** Windows 11 x64 and Blackmagic ATEM Switchers 10.2. Connection and model identification were tested with the Blackmagic SDK 10.2.1.
 
-1. Installiere und öffne den **Habster ATEM Hardware Emulator**. Beim ersten Start ist der **ATEM 2 M/E Constellation HD** ausgewählt.
-2. Öffne **ATEM Software Control** auf demselben PC. Wähle **File → Connection → Manual IP Address**.
-3. Gib `127.0.0.1` ein und klicke auf **Connect**.
-4. Für einen Modellwechsel im Emulator **Stoppen**, ein anderes Modell wählen und **Starten**. Verbinde dich danach erneut in ATEM Software Control.
+1. Install and launch **Habster ATEM Hardware Emulator**. The **ATEM 2 M/E Constellation HD** is selected on first launch.
+2. Open **ATEM Software Control** on the same PC. Choose **File → Connection → Manual IP Address**.
+3. Enter `127.0.0.1` and click **Connect**.
+4. To switch models, click **Stop**, select another model and click **Start**. Then reconnect in ATEM Software Control.
 
-<img src="ATEM-Hardware-Emulator/manual/main-de.png" alt="Emulatorfenster mit ausgewähltem Modell und der Verbindungsadresse 127.0.0.1" width="425">
 
-In den **Einstellungen** kannst du zwischen Deutsch und Englisch wechseln, den Windows-Autostart und den Betrieb im Infobereich aktivieren oder manuell und beim Programmstart nach Updates suchen.
+In **Settings**, you can switch between English and German, enable Windows startup and system tray operation, or check for updates manually or on launch.
 
-## Unterstützte Modelle
+## Supported models
 
-| Modell | SDI-Eingänge | Aux-Ausgänge | Upstream-Keyer | DSK | SuperSource |
+| Model | SDI inputs | Aux outputs | Upstream keyers | DSKs | SuperSource |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | 1 M/E Constellation HD / 4K | 10 | 6 | 4 | 1 | 0 |
 | 2 M/E Constellation HD / 4K | 20 | 12 | 8 | 2 | 1 |
 | 4 M/E Constellation HD / 4K | 40 | 24 | 16 | 4 | 2 |
-| Constellation 8K im HD-Modus | 40 | 24 | 16 | 4 | 2 |
+| Constellation 8K in HD mode | 40 | 24 | 16 | 4 | 2 |
 
-Die App stellt einen modellspezifischen Startzustand bereit. Änderungen und Videoformatwechsel in ATEM Software Control werden noch nicht übernommen oder gespeichert. Die 4K- und 8K-Modelle starten im HD-Modus. Die Einstellungsseiten sind noch nicht vollständig geprüft.
+The emulator provides a model-specific starting state. It does not apply or save switcher changes or video format changes. The 4K and 8K models start in HD mode. Testing of the settings pages in ATEM Software Control is still incomplete.
 
-Der **4K Plus** liegt als Entwicklungsprofil vor. Beim Synchronisieren mit dem SDK tritt ein Fehler auf, weshalb das Profil in Version 0.4.0 noch nicht zur Auswahl steht. Die **Constellation-IP-Modelle** benötigen eigene Profile für ATEM Switchers 11.0.
+The **4K Plus** development profile fails SDK synchronization and is unavailable in the version 0.4.0 model selector. The **Constellation IP** models need profiles for ATEM Switchers 11.0.
 
-## Selbst bauen und weiterentwickeln
+## Build and contribute
 
-Der Windows-Build verwendet **Qt 6 mit passendem MinGW-Kit**, **CMake**, **Ninja** und **Inno Setup 7**. Führe im Projektverzeichnis den folgenden Befehl aus.
+The Windows build uses **Qt 6 with a matching MinGW kit**, **CMake**, **Ninja** and **Inno Setup 7**. Run this command from the project directory.
 
 ```powershell
 .\packaging\build.cmd
 ```
 
-Abweichende Installationspfade lassen sich mit `-Qt`, `-MinGW` und `-Inno` angeben. Der Build legt den Installer, die Versionshinweise, das Quellcode-ZIP und das SHA-256-Manifest unter `ATEM-Hardware-Emulator/releases/<Version>/` ab.
+Use `-Qt`, `-MinGW` and `-Inno` to specify custom tool paths. The build writes the installer, release notes, source ZIP and SHA-256 manifest to `ATEM-Hardware-Emulator/releases/<Version>/`.
 
-- [main.cpp](main.cpp) enthält die Qt-Oberfläche und den lokalen ATEM-UDP-Server.
-- [profiles/](profiles/) enthält die Geräteprofile. Mit `node profiles/generate-profiles.mjs` kannst du die abgeleiteten Profile neu erzeugen. Für den normalen Windows-Build genügt der vorhandene Profilsatz.
-- [packaging/](packaging/) enthält den Windows-Build und die Paketierung.
-- [ATEM-Hardware-Emulator/](ATEM-Hardware-Emulator/) enthält die zweisprachige Downloadseite und das Handbuch.
+- [main.cpp](main.cpp) contains the Qt interface and local ATEM UDP server.
+- [profiles/](profiles/) contains the device profiles. Run `node profiles/generate-profiles.mjs` to regenerate the derived profiles. The standard Windows build uses the included profiles.
+- [packaging/](packaging/) contains the Windows build and packaging files.
 
-Pull Requests für neue oder korrigierte Profile sind willkommen. Gib bei Fehlerberichten bitte die Version von ATEM Software Control, das gewählte Mischermodell und die Schritte an, mit denen sich das Problem nachstellen lässt.
+Pull requests for new or corrected profiles are welcome. For bug reports, include your ATEM Software Control version, the selected switcher model and the steps to reproduce the issue.
 
-## Lizenz
+## License
 
-Der Quellstand steht unter der [MIT-Lizenz](LICENSE). Die vorgefertigte Windows-Ausgabe enthält die [deutsche](packaging/LICENSE.de.txt) und [englische Installationsvereinbarung](packaging/LICENSE.txt).
+The source code is available under the [MIT License](LICENSE). The prebuilt Windows release includes separate [English](packaging/LICENSE.txt) and [German](packaging/LICENSE.de.txt) installer agreements.
 
-## English overview
+## Deutsch
 
-Habster ATEM Hardware Emulator presents a local Constellation switcher profile so you can explore ATEM Software Control and plan a setup before the hardware is available. Run the emulator on Windows 11 x64, then connect from ATEM Software Control on the same PC using **File → Connection → Manual IP Address** and `127.0.0.1`.
+Der **Habster ATEM Hardware Emulator** stellt auf einem Windows-11-PC einen virtuellen ATEM Constellation bereit. Damit kannst du in **ATEM Software Control** einen Aufbau vorbereiten und die Bedienelemente von sieben Mischermodellen erkunden, bevor die Hardware verfügbar ist.
 
-Version 0.4.0 includes seven selectable SDI profiles for Blackmagic ATEM Switchers 10.2. Connectivity and model identification were tested with SDK 10.2.1. The emulator provides a starting state for planning. Switcher changes and video format changes are not applied or saved.
+Emulator starten und auf demselben PC in ATEM Software Control unter **File → Connection → Manual IP Address** mit `127.0.0.1` verbinden. Die Profile sind für ATEM Switchers 10.2 vorgesehen. Änderungen am virtuellen Mischer werden nicht gespeichert.
 
-Run `packaging\build.cmd` with an existing Qt 6 MinGW kit, CMake, Ninja and Inno Setup 7 to build the installer and source archive. The source is available under the [MIT License](LICENSE). [English user manual](https://www.habster.ch/ATEM-Hardware-Emulator/?tab=manual&lang=en)
+[Windows-Installer](https://www.habster.ch/ATEM-Hardware-Emulator/?lang=de) · [Deutsches Handbuch](https://www.habster.ch/ATEM-Hardware-Emulator/?tab=manual&lang=de) · [MIT-Lizenz](LICENSE)
+
