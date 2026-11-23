@@ -1,6 +1,6 @@
 # Habster ATEM Hardware Emulator
 
-![ATEM Hardware Emulator Icon](icon.png)
+<img src="icon.png" alt="ATEM Hardware Emulator" width="128">
 
 Plane ein ATEM-Constellation-Setup in **ATEM Software Control**, bevor ein physischer Mischer zur Verfügung steht. Der Emulator stellt auf demselben Windows-PC ein auswählbares Mischermodell bereit. Damit kannst du prüfen, welche Eingänge, Keyer, SuperSource- und Multiview-Optionen das jeweilige Modell für deinen Aufbau bietet.
 
