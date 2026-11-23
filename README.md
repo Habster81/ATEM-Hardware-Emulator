@@ -49,10 +49,6 @@ Abweichende Installationspfade lassen sich mit `-Qt`, `-MinGW` und `-Inno` angeb
 
 Pull Requests für neue oder korrigierte Profile sind willkommen. Gib bei Fehlerberichten bitte die Version von ATEM Software Control, das gewählte Mischermodell und die Schritte an, mit denen sich das Problem nachstellen lässt.
 
-### Downloadseite betreiben
-
-Stelle `ATEM-Hardware-Emulator/` auf einem PHP-Webserver bereit. Der PHP-Prozess benötigt Schreibrechte in `releases/` für den Downloadzähler. Lade bei einer neuen Version zuerst den neuen Release-Ordner hoch und ersetze dann `latest.json` im Webroot. Frühere Installer können im Archiv verbleiben. Die Seite verlinkt das Quellcode-ZIP der neuesten Version. GitHub kann den Quellstand und Release-Dateien verwalten. Der PHP-Downloadzähler läuft auf dem PHP-Webserver.
-
 ## Lizenz
 
 Der Quellstand steht unter der [MIT-Lizenz](LICENSE). Die vorgefertigte Windows-Ausgabe enthält die [deutsche](packaging/LICENSE.de.txt) und [englische Installationsvereinbarung](packaging/LICENSE.txt).
